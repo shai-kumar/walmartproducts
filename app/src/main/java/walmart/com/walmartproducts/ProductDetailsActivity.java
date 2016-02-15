@@ -87,6 +87,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         ViewPager mCarouselPager;
         @Bind(R.id.indicator)
         CirclePageIndicator mTitleIndicator;
+        @Bind(R.id.rating)
+        TextView mRating;
+        @Bind(R.id.review)
+        TextView mReview;
+
 
         CarouselPagerAdapter mCarouselPagerAdapter;
 
@@ -102,10 +107,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             /**
              * Image carousel in product details page. End point returns a single product url.
-             *  Replicating the url to create a list of 5 images
-            */
-            List<String> imageUrls = new ArrayList<>(5);
+             *  Replicating the url to create a list of 6 images
+             */
+            List<String> imageUrls = new ArrayList<>(6);
             String productImage = mProductList.get(position).getProductImage();
+            imageUrls.add(productImage);
             imageUrls.add(productImage);
             imageUrls.add(productImage);
             imageUrls.add(productImage);
@@ -133,6 +139,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
             if (product.getLongDescription() != null) {
                 mLongDescription.setText(Html.fromHtml(product.getLongDescription()));
             }
+            mRating.setText("Rating: " + product.getReviewRating() + " stars");
+            mReview.setText(product.getReviewCount() + " reviews");
             return rootView;
         }
 

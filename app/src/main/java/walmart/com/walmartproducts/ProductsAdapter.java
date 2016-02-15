@@ -74,7 +74,8 @@ public class ProductsAdapter extends BaseAdapter {
     public ProductsAdapter(Context context) {
         mContext = context;
         showProgressBar();
-        WalmartWebClient.client().getProducts(mLastFetchedPage + 1, new Callback<WalmartResponse>() {
+        WalmartWebClient.getInstance(mContext)
+                .getProducts(mLastFetchedPage + 1, new Callback<WalmartResponse>() {
             @Override
             public void onResponse(Call<WalmartResponse> call, Response<WalmartResponse> response) {
                 dismissProgressBar();
@@ -146,7 +147,8 @@ public class ProductsAdapter extends BaseAdapter {
         }
         isFetchingNextPage = true;
         showProgressBar();
-        WalmartWebClient.client().getProducts(mLastFetchedPage + 1, new Callback<WalmartResponse>() {
+        WalmartWebClient.getInstance(mContext)
+                .getProducts(mLastFetchedPage + 1, new Callback<WalmartResponse>() {
             @Override
             public void onResponse(Call<WalmartResponse> call, Response<WalmartResponse> response) {
                 dismissProgressBar();
