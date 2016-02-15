@@ -73,8 +73,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         @Bind(R.id.product_name)
         TextView mProductName;
-/*        @Bind(R.id.product_image)
-        ImageView mProductImage;*/
         @Bind(R.id.product_short_description)
         TextView mShortDescription;
         @Bind(R.id.product_price)
@@ -88,7 +86,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         @Bind(R.id.carousel_pager)
         ViewPager mCarouselPager;
         @Bind(R.id.indicator)
-        CirclePageIndicator mIndicator;
+        CirclePageIndicator mTitleIndicator;
 
         CarouselPagerAdapter mCarouselPagerAdapter;
 
@@ -116,16 +114,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             mCarouselPagerAdapter = new CarouselPagerAdapter(getActivity(), imageUrls);
             mCarouselPager.setAdapter(mCarouselPagerAdapter);
-            mIndicator.setViewPager(mCarouselPager);
+            mTitleIndicator.setViewPager(mCarouselPager);
 
             if (product.getProductName() != null) {
                 mProductName.setText(Html.fromHtml(product.getProductName()));
             }
-/*            Picasso.with(getActivity())
-                    .load(product.getProductImage())
-                    .resizeDimen(R.dimen.product_details_image_size, R.dimen.product_details_image_size)
-                    .error(R.drawable.walmart_logo)
-                    .into(mProductImage);*/
             if (product.getShortDescription() != null) {
                 mShortDescription.setText(Html.fromHtml(product.getShortDescription()));
             }

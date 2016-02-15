@@ -24,7 +24,7 @@ public class WalmartWebClient {
         CLIENT;
         private final WalmartWebClient client;
 
-        private Singleton() {
+        Singleton() {
             this.client = new WalmartWebClient(WalmartApplication.context());
         }
     }
@@ -56,9 +56,4 @@ public class WalmartWebClient {
                     .enqueue(callback);
 
     }
-
-    public WalmartApi walmartApi() {
-        return mWalmartApi;
-    }
-
 }
