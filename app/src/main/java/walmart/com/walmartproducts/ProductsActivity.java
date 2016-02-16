@@ -21,9 +21,6 @@ public class ProductsActivity extends AppCompatActivity {
     public static final String PRODUCT_LIST = "product_list";
     public static final String PRODUCT_LIST_POSITION = "product_list_position";
 
-    private static final int PAGE_SIZE = 10;
-
-
     @Bind(R.id.progress_bar)
     ProgressBar mProgressBar;
     @Bind(R.id.product_list)
@@ -31,7 +28,6 @@ public class ProductsActivity extends AppCompatActivity {
 
     private ProductsAdapter mProductAdapter;
     private int previousLastVisibleItem;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +76,7 @@ public class ProductsActivity extends AppCompatActivity {
                 if (visibleItemCount > 0 && lastVisibileItem == totalItemCount)
                     if (previousLastVisibleItem != lastVisibileItem)
                         mProductAdapter.fetchNextPage();
-                    previousLastVisibleItem = lastVisibileItem; // to handle repeated onScroll calls
+                previousLastVisibleItem = lastVisibileItem; // to handle repeated onScroll calls
             }
         });
     }

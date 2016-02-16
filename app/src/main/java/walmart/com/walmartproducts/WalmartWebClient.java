@@ -29,9 +29,9 @@ public class WalmartWebClient {
     private Context mContext;
 
     public static WalmartWebClient getInstance(Context context) {
-        if(instance == null) {
+        if (instance == null) {
             synchronized (WalmartWebClient.class) {
-                if(instance == null) {
+                if (instance == null) {
                     instance = new WalmartWebClient(context);
                 }
             }
@@ -46,7 +46,9 @@ public class WalmartWebClient {
 
     public void buildApi() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        if (BuildConfig.DEBUG) {
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        }
         File cacheDir = createCacheDir(mContext, WALMART_HTTP_CACHE);
         Cache cache = new Cache(cacheDir, calculateDiskCacheSize(cacheDir));
         OkHttpClient client = new OkHttpClient.Builder()
@@ -83,6 +85,5 @@ public class WalmartWebClient {
     public void getProducts(int pageNumber, final Callback<WalmartResponse> callback) {
         mWalmartApi.getProducts(WALMART_API_KEY, pageNumber, PAGE_SIZE)
                 .enqueue(callback);
-
     }
 }

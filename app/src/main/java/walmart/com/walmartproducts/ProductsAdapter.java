@@ -1,9 +1,5 @@
 package walmart.com.walmartproducts;
 
-/**
- * Created by skuma46 on 4/17/15.
- */
-
 import android.content.Context;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -74,7 +70,7 @@ public class ProductsAdapter extends BaseAdapter {
     public ProductsAdapter(Context context) {
         mContext = context;
         showProgressBar();
-        WalmartWebClient.getInstance(mContext)
+        WalmartWebClient.getInstance(mContext.getApplicationContext())
                 .getProducts(mLastFetchedPage + 1, new Callback<WalmartResponse>() {
             @Override
             public void onResponse(Call<WalmartResponse> call, Response<WalmartResponse> response) {
@@ -120,7 +116,8 @@ public class ProductsAdapter extends BaseAdapter {
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         if(mProductList.get(position).getProductName() != null) {
-            viewHolder.mProductName.setText(Html.fromHtml(mProductList.get(position).getProductName()));
+            viewHolder.mProductName.setText(Html.fromHtml(mProductList
+                    .get(position).getProductName(), null, new TagHandler()));
         }
         if(mProductList.get(position).getProductImage() != null) {
         Picasso.with(mContext)
@@ -132,7 +129,7 @@ public class ProductsAdapter extends BaseAdapter {
         }
         return convertView;
     }
-    private class ViewHolder {
+    static class ViewHolder {
         ImageView mProductImage;
         TextView mProductName;
     }
@@ -147,7 +144,7 @@ public class ProductsAdapter extends BaseAdapter {
         }
         isFetchingNextPage = true;
         showProgressBar();
-        WalmartWebClient.getInstance(mContext)
+        WalmartWebClient.getInstance(mContext.getApplicationContext())
                 .getProducts(mLastFetchedPage + 1, new Callback<WalmartResponse>() {
             @Override
             public void onResponse(Call<WalmartResponse> call, Response<WalmartResponse> response) {
