@@ -94,6 +94,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
         CarouselPagerAdapter mCarouselPagerAdapter;
+        TagHandler mTagHandler = new TagHandler();
 
 
         @Override
@@ -126,7 +127,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 mProductName.setText(Html.fromHtml(product.getProductName()));
             }
             if (product.getShortDescription() != null) {
-                mShortDescription.setText(Html.fromHtml(product.getShortDescription()));
+                mShortDescription.setText(Html.fromHtml(product.getShortDescription(), null,
+                        mTagHandler));
             }
             mPrice.setText(product.getPrice());
             if (product.getInStock()) {

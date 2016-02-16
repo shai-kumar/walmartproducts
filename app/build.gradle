@@ -12,7 +12,7 @@ apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
         applicationId "walmart.com.walmartproducts"
@@ -21,10 +21,21 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        fakeJks {
+            storeFile file("config/fakeJks.jks")
+            storePassword "123456"
+            keyAlias "123456"
+            keyPassword "123456"
+        }
+        realJks {
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.fakeJks
         }
     }
 }
