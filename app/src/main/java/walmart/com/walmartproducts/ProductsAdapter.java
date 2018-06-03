@@ -25,6 +25,8 @@ import retrofit2.Response;
 
 public class ProductsAdapter extends BaseAdapter {
 
+    private static int PRODUCT_COUNT_CAP = 1000; 
+        
     @AutoParcel
     public static abstract class Product implements Parcelable{
         public abstract String getProductId();
@@ -141,6 +143,10 @@ public class ProductsAdapter extends BaseAdapter {
         if(mProductList.size() >= mTotalProductCount) {
             Toast.makeText(mContext, "No more products.", Toast.LENGTH_SHORT).show();
             return;
+        }
+        if(mProductList.size() > PRODUCT_COUNT_CAP) {
+            // prune the top of mProductList by  PRODUCT_COUNT_CAP / 2
+            mProductList.remove(0, PRODUCT_COUNT_CAP / 2);
         }
         isFetchingNextPage = true;
         showProgressBar();
